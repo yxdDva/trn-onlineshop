@@ -28,6 +28,7 @@ public class UserController {
     //login其实是不需要modelatt的，但是它起到了一个创建对象的作用
     public String login(@ModelAttribute User user,ModelMap map) {
         System.out.println("/user/login");
+
         return "login";
     }
 
