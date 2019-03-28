@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>login</title>
+    <style>
+        .btn-left {
+            position: relative;
+            left: 20px;
+            top: 20px;
+        }
+        .btn-right {
+            position: relative;
+            left: 80px;
+            top: 20px;
+        }
+        .icon-center {
+            position: relative;
+            left: 75px;
+        }
+    </style>
+    <link th:href="@{/css/signin.css}" rel="stylesheet"/>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet"/>
+</head>
+<body>
+
+
+<form action="#" th:action="@{/user/login}" th:object="${user}" method="post" class="form-signin">
+    <img class="mb-4 icon-center" th:src="@{/assets/watson.png}" alt="" width="150" height="150"/>
+    <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+    <label for="inputUserName" class="sr-only">
+        UserName</label>
+    <input type="text" id="inputUserName" th:field="*{userName}" class="form-control" placeholder="UserName"/>
+    <label for="inputPassword" class="sr-only">
+        Password</label>
+    <input type="text" id="inputPassword" th:field="*{passWord}" class="form-control" placeholder="Password"/>
+    <h5 class="alert-danger" th:text="${error}"></h5>
+    <button class="btn btn-lg btn-primary btn-left" type="submit">
+        Sign in</button>
+    <button class="btn btn-lg btn-success btn-right" type="button">
+        Sign up</button>
+    <p class="mt-5 mb-3 text-muted text-center">2019 IBM</p>
+</form>
+
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

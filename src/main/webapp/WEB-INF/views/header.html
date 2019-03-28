@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <!--<title>Title</title>-->
+    <link href="../css/header.css" rel="stylesheet"/>
+    <!--写法改进，参考8.3 Flexible layouts: beyond mere fragment insertion-->
+</head>
+<body>
+<!--导航栏-->
+<header>
+
+    <ul th:fragment="navbar">
+        <li><a class="active" href="../prod/sp">首页</a></li>
+        <li><a href="#news">新闻</a></li>
+        <li><a href="#product">产品</a></li>
+        <li><a href="#about">关于我们</a></li>
+        <li><a href="#" class="text-muted">注册</a></li>
+        <li><a th:if="${session.isLogin}" th:text="'欢迎你，'+${session.nowuser.getUserName()}+'!'" href="#" class="text-muted"></a></li>
+        <li><a th:unless="${session.isLogin}" th:text="'请登陆'" th:href="@{/user/login}" class="text-muted"></a></li>
+        <li><a th:href="@{/cart/all}" class="text-muted">购物车</a></li>
+    </ul>
+
+</header>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>购物车</title>
+    <link rel="stylesheet" href="../css/bootstrap3.min.css"/>
+    <link rel="stylesheet" href="../css/mycart.css"/>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/mycart.js"></script>
+</head>
+<body>
+
+<!--导航栏样式覆盖问题-->
+<!--<header>-->
+<!--<ul th:include="header :: navbar"></ul>-->
+<!--</header>-->
+
+<div class="container header">
+    <a th:href="@{/prod/sp}"></a>
+    <!--换logo去css里找watson.png-->
+    <div class="header-search">
+        <input type="text" class="header-search-text"/>
+        <input type="button" value="搜 索" class="header-search-btn"/>
+    </div>
+</div>
+<div class="container cart-title">
+    <h2>我的购物车</h2>
+    <!-- <p class="divider"></p> -->
+</div>
+<!---->
+<form id="orderForm" th:action="@{/order/genji}" method="post">
+    <div class="container cart-main">
+        <div class="cart-head">
+            <ul class="cart-list cart-top list-inline">
+                <li class="list-chk">
+                    <input type="checkbox" id="checkAll" class="check-all"/>
+                    <label for="checkAll" class="c6">全选</label>
+                </li>
+                <li class="list-msg">商品</li>
+                <li class="list-amount">数量</li>
+                <li class="list-price">单价</li>
+                <li class="list-sum">总价</li>
+                <li class="list-operation">操作</li>
+            </ul>
+        </div>
+        <div class="cart-box">
+            <div class="shop-info">
+                <div class="all-check">
+                    <input type="checkbox" id="shop0" class="shop-check"/>
+                    <label for="shop0">
+                        <img th:src="@{/assets/cart/gold-seller.png}"/>
+                        店铺：
+                    </label>
+                    <a href="#">IBM-GH服装旗舰店</a>
+                </div>
+                <div class="shop-name"></div>
+            </div>
+            <div class="cart-content" th:each="citem:${clist}">
+                <ul class="cart-list">
+                    <li class="list-chk">
+                        <!--勾选框的值:猥琐处理字符串拼接，后台分割-->
+                        <input type="checkbox" name="checkbb" id="checkBox1" th:value="${citem.product.id}+','+${citem.amount}"
+                               class="goods-check" style="display: inline-block;"/>
+                    </li>
+                    <li class="list-msg">
+                        <div class="list-img">
+                            <a href="javascript:;">
+                                <img th:src="@{'/assets/product/case_'+${citem.product.id}+'.jpg'}" alt=""/>
+                            </a>
+                        </div>
+                        <div class="list-des">
+                            <p class="p-info">
+                                <a th:href="@{'/prod/detail?id='+${citem.product.id}}"
+                                   th:text="${citem.product.name}"></a>
+                            </p>
+                            <p class="p-type" th:text="'型号：APTX-4869-'+${citem.product.id}"></p>
+                            <p class="p-color">颜色：爱啥色啥色</p>
+                        </div>
+                    </li>
+                    <li class="list-amount">
+                        <div class="amount-box">
+                            <a href="javascript:;" class="reduce reSty">-</a>
+                            <!--不能动态改变，先做只读-->
+                            <input type="text" readonly="readonly" th:value="${citem.amount}" class="sum"/>
+                            <a href="javascript:;" class="add">+</a>
+                        </div>
+                    </li>
+                    <li class="list-price">
+                        <p class="non-discount">￥998.00</p>
+                        <p class="price" th:text="'￥'+${citem.product.price}"></p>
+                    </li>
+                    <li class="list-sum"><p class="sum-price" th:text="'￥'+${citem.product.price*citem.amount}">总价咯</p>
+                    </li>
+                    <li class="list-operation">
+                        <div class="btn-operation">
+                            <a th:href="@{'/cart/del?id='+${citem.product.id}}" class="btn-del">删除</a>
+                            <a href="javascript:;" class="btn-col">收藏</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="cart-toolbar">
+        <div class="container cart-footer">
+            <div class="footer-left">
+                <ul class="list-inline">
+                    <li><a href="javascript:;" class="btn-del-choose">删除选中的商品</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <div class="amount">已选择<strong class="amount-num">0</strong>件商品</div>
+                <div class="sum">总价:<strong class="total-sum">￥0.00</strong></div>
+                <div class="btn-area">
+                    <!--*-->
+                    <a onclick="document.getElementById('orderForm').submit();" class="btn-sum">去结算</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<style>
+    .backToTop {
+        display: none;
+        width: 18px;
+        line-height: 1.2;
+        padding: 5px 0;
+        background-color: #000;
+        color: #fff;
+        font-size: 12px;
+        text-align: center;
+        position: fixed;
+        _position: absolute;
+        right: 10px;
+        bottom: 100px;
+        _bottom: "auto";
+        cursor: pointer;
+        opacity: .6;
+        filter: Alpha(opacity=60);
+    }
+</style>
+<script>
+    (function () {
+        var $backToTopTxt = "返回顶部", $backToTopEle = $('<div class="backToTop"></div>').appendTo($("body"))
+            .text($backToTopTxt).attr("title", $backToTopTxt).click(function () {
+                $("html, body").animate({scrollTop: 0}, 120);
+            }), $backToTopFun = function () {
+            var st = $(document).scrollTop(), winh = $(window).height();
+            (st > 0) ? $backToTopEle.show() : $backToTopEle.hide();
+            //IE6下的定位
+            if (!window.XMLHttpRequest) {
+                $backToTopEle.css("top", st + winh - 166);
+            }
+        };
+        $(window).bind("scroll", $backToTopFun);
+        $(function () {
+            $backToTopFun();
+        });
+    })();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0"/>
+    <link href="../css/bootstrap.css" rel="stylesheet"/>
+    <link href="../css/header.css" rel="stylesheet"/>
+    <style>
+        img {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<!--导航栏-->
+<header>
+
+    <ul th:include="header :: navbar"></ul>
+
+</header>
+<div>
+    <p class="text-danger text-lg-center " style="text-decoration: line-through">请付款：¥488元</p>
+    <p class="text-danger text-xl-center" >IBM员工折扣价：看着给吧</p>
+    <h1 class="text-center">！！多谢老板 ！！</h1>
+</div>
+
+<img th:src="@{/assets/paymm.jpeg}" align="middle" style="width: 400px;" alt="支付宝二维码"/>
+<h2 class="text-center">欢迎下次惠顾</h2>
+
+<div align="center">
+    <button onclick="click1()" class="btn btn-lg btn-success ">我已支付</button>
+    <button onclick="click2()" class="btn btn-lg btn-info">我再想想</button>
+</div>
+
+<script>
+    function click1() {
+        alert("我赌5毛你肯定没付钱！");
+        alert("哼哼，吃霸王餐");
+        alert("那来了，就别想走了！");
+        location.href="../prod/sp"
+    }
+
+    function click2() {
+        alert("你再好好想想！");
+        location.href="../prod/sp"
+    }
+</script>
+</body>
+</html>

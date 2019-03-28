@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+
+<span>mycart.html最后</span>
+<!-- 删除商品自定义模态框 -->
+<!--<div class="modal-backdrop fade in" style="display: none;"></div>-->
+<!--<div class="modal-goodsdel modal-del">-->
+<!--<p class="title-del">删除宝贝<span class="closeModal">x</span></p>-->
+<!--<p>您确定要删除该宝贝吗</p>-->
+<!--<div class="btn-goodsdel btn-modal">-->
+<!--<a th:href="@{'/cart/del?id='+${citem.product.id}}" class="btn btn-default btn-sure">确定</a>-->
+<!--<a href="javascript:;" class="btn btn-default btn-close">关闭</a>-->
+<!--</div>-->
+<!--</div>-->
+<!-- 删除选中商品自定义模态框 -->
+<!--<div class="modal-seldel modal-del">-->
+<!--<p class="title-del">删除宝贝<span class="closeModal">x</span></p>-->
+<!--<p>您确定要删除这些宝贝吗</p>-->
+<!--<div class="btn-seldel btn-modal">-->
+<!--<a th:href="@{'/cart/del?id='+${citem.product.id}}" class="btn btn-default btn-sure">确定</a>-->
+<!--<a href="javascript:;" class="btn btn-default btn-close">关闭</a>-->
+<!--</div>-->
+<!--</div>-->
+
+<script>
+    //***
+    function printDetails() {
+        debugger;
+        var checkID = [];
+        $("input[name='checkedid']:checked").each(function (i) {
+            checkID[i] = $(this).val();
+            console.log(checkID);
+        });
+    }
+</script>
+</body>
+</html>
